@@ -1,6 +1,15 @@
 {
-  "name": "braweria-website-code",
-  "private": true,
+  "name": "nextjs-ts-boilerplate",
+  "author": {
+    "name": "Wiktoria Mielcarek",
+    "email": "w.mielcarek@braweria.de"
+  },
+  "version": "1.0.0",
+  "description": "Next.js Boilerplate configured with TypeScript, Eslint Galex and Prettier.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Braweria/nextjs-ts-boilerplate.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
