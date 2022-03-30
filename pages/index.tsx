@@ -1,11 +1,16 @@
-import type { NextPageWithTitle } from '../utils/NextPageWithTitle';
 import Head from 'next/head';
+import { fetchCharacters } from 'redux/slices/characters.slice';
+import { wrapper } from 'redux/store';
 
+import { List } from '@/List';
+import type { NextPageWithTitle } from '~/utils/NextPageWithTitle';
+
+// eslint-disable-next-line react/function-component-definition
 const Home: NextPageWithTitle = () => {
   return (
     <div style={{ height: '100vh', backgroundColor: '#007acc' }}>
       <Head>
-        <title>Next.js Boilerplate with TypeScript</title>
+        <title>Marvel Characters</title>
       </Head>
 
       <main
@@ -19,8 +24,8 @@ const Home: NextPageWithTitle = () => {
           height: '100%',
         }}
       >
-        <h1 style={{ margin: 0 }}>Next.js Boilerplate with TypeScript</h1>
-        <p>Start editing...</p>
+        <h1 style={{ margin: 0 }}>Marvel Characters</h1>
+        <List />
       </main>
     </div>
   );
@@ -28,4 +33,14 @@ const Home: NextPageWithTitle = () => {
 
 export default Home;
 
-Home.title = 'Next.js Boilerplate with TypeScript';
+Home.title = 'Marvel Characters';
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async () => {
+    await store.dispatch(fetchCharacters());
+
+    return {
+      props: {},
+    };
+  }
+);
