@@ -2,13 +2,13 @@ import Head from 'next/head';
 import { fetchCharacters } from 'redux/slices/characters.slice';
 import { wrapper } from 'redux/store';
 
-import { List } from '@/List';
+import { CharacterList } from '@/List';
 import type { NextPageWithTitle } from '~/utils/NextPageWithTitle';
 
 // eslint-disable-next-line react/function-component-definition
 const Home: NextPageWithTitle = () => {
   return (
-    <div style={{ height: '100vh', backgroundColor: '#007acc' }}>
+    <div style={{ height: '100vh' }}>
       <Head>
         <title>Marvel Characters</title>
       </Head>
@@ -25,7 +25,7 @@ const Home: NextPageWithTitle = () => {
         }}
       >
         <h1 style={{ margin: 0 }}>Marvel Characters</h1>
-        <List />
+        <CharacterList />
       </main>
     </div>
   );
