@@ -1,5 +1,6 @@
 :root {
   --background: #202020;
+  --color: white;
 }
 
 html,
@@ -7,6 +8,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: Open Sans, Roboto, Arial, Helvetica, sans-serif;
+  color: var(--color);
   background-color: var(--background);
 }
 
@@ -24,5 +26,6 @@ a {
 @media (prefers-color-scheme: light) {
   :root {
     --background: #fff;
+    --color: #202020;
   }
 }
