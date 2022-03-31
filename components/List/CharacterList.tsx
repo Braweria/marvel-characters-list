@@ -31,7 +31,12 @@ export function CharacterList() {
         data={characters}
         itemContent={(_index, character) => {
           return (
-            <Link href={`/${character.id}`}>
+            <Link
+              href={{
+                pathname: '/[id]',
+                query: { id: character.id },
+              }}
+            >
               <a>
                 <div>
                   <Avatar
