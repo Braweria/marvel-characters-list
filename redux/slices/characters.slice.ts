@@ -16,7 +16,7 @@ const adapter = createEntityAdapter<Character>();
 const initialState: CharactersState = adapter.getInitialState({
   status: 'idle',
   statuses: {},
-  limit: 3,
+  limit: 30,
   offset: 0,
 });
 
@@ -34,6 +34,7 @@ export const fetchCharacters = createAsyncThunk(
     const now = Date.now().toString();
     charactersUrl.searchParams.set('ts', now);
 
+    console.log('hello', env);
     if (!env.MARVEL_PUBLIC_KEY || !env.MARVEL_PRIVATE_KEY) {
       throw new Error('No Marvel API Key was found');
     }
@@ -50,7 +51,11 @@ export const fetchCharacters = createAsyncThunk(
 export const charactersSlice = createSlice({
   name: 'characters',
   initialState,
-  reducers: {},
+  reducers: {
+    updateOffset: (state) => {
+      state.offset += 30;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(HYDRATE, (state, action) => {
@@ -80,6 +85,7 @@ export const charactersSlice = createSlice({
 });
 
 export const characterReducer = charactersSlice.reducer;
+export const { updateOffset } = charactersSlice.actions;
 export const {
   selectAll: selectAllCharacters,
   selectById: selectCharacterById,
