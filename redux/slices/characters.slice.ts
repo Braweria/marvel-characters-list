@@ -1,6 +1,7 @@
 import {
   createAsyncThunk,
   createEntityAdapter,
+  createSelector,
   createSlice,
 } from '@reduxjs/toolkit';
 import md5 from 'md5';
@@ -8,10 +9,11 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { env } from 'process';
 
 import type { RootState } from '../store';
+import type { CharactersState, Character } from '../typesSlice';
 import { client } from '~/client';
 
-const adapter = createEntityAdapter();
-const initialState = adapter.getInitialState({
+const adapter = createEntityAdapter<Character>();
+const initialState: CharactersState = adapter.getInitialState({
   status: 'idle',
   statuses: {},
   limit: 3,
@@ -83,3 +85,8 @@ export const {
   selectById: selectCharacterById,
   selectIds: selectCharacterIds,
 } = adapter.getSelectors((state: RootState) => state.characters);
+
+export const selectCharacterStatus = createSelector(
+  [(state: RootState) => state.characters.status],
+  (status) => status
+);
