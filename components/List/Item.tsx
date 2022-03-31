@@ -2,14 +2,14 @@ import { forwardRef } from 'react';
 import type { Components } from 'react-virtuoso';
 
 import styles from './CharacterList.module.css';
-import type { ListRef } from './types';
+import type { ItemRef } from './types';
 
-export const List = forwardRef<ListRef, Components['List']>(
+export const Item = forwardRef<ItemRef, Components['Item']>(
   ({ children, ...props }, ref) => {
     return (
-      <ul {...props} ref={ref} className={styles.list}>
+      <li {...props} ref={ref} className={styles.item}>
         {children}
-      </ul>
+      </li>
     );
   }
 );
