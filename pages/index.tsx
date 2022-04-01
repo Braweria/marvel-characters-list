@@ -24,7 +24,7 @@ const Home: NextPageWithTitle = () => {
           height: '100%',
         }}
       >
-        <h1 style={{ margin: 0 }}>Marvel Characters</h1>
+        <h1>Marvel Characters</h1>
         <CharacterList />
       </main>
     </div>
