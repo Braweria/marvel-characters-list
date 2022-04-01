@@ -1,5 +1,6 @@
 :root {
   --background: #202020;
+  --border: #393939;
   --color: white;
   --marvel-red: #e62429;
 }
@@ -8,9 +9,13 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: Open Sans, Roboto, Arial, Helvetica, sans-serif;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   color: var(--color);
   background-color: var(--background);
+}
+
+h1 {
+  margin: 2rem 0 1rem;
 }
 
 a {
