@@ -6,7 +6,6 @@ import {
 } from '@reduxjs/toolkit';
 import md5 from 'md5';
 import { HYDRATE } from 'next-redux-wrapper';
-import { env } from 'process';
 
 import type { RootState } from '../store';
 import type { CharactersState, Character } from '../typesSlice';
@@ -34,13 +33,20 @@ export const fetchCharacters = createAsyncThunk(
     const now = Date.now().toString();
     charactersUrl.searchParams.set('ts', now);
 
-    console.log('hello', env);
-    if (!env.MARVEL_PUBLIC_KEY || !env.MARVEL_PRIVATE_KEY) {
+    if (
+      !process.env.NEXT_PUBLIC_MARVEL_PUBLIC_KEY ||
+      !process.env.NEXT_PUBLIC_MARVEL_PRIVATE_KEY
+    ) {
       throw new Error('No Marvel API Key was found');
     }
-    const hash = md5(`${now}${env.MARVEL_PRIVATE_KEY}${env.MARVEL_PUBLIC_KEY}`);
+    const hash = md5(
+      `${now}${process.env.NEXT_PUBLIC_MARVEL_PRIVATE_KEY}${process.env.NEXT_PUBLIC_MARVEL_PUBLIC_KEY}`
+    );
     charactersUrl.searchParams.set('hash', hash);
-    charactersUrl.searchParams.set('apikey', env.MARVEL_PUBLIC_KEY.toString());
+    charactersUrl.searchParams.set(
+      'apikey',
+      process.env.NEXT_PUBLIC_MARVEL_PUBLIC_KEY.toString()
+    );
 
     const response = await client.get(charactersUrl.href);
 
