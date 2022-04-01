@@ -55,6 +55,14 @@
   font-style: italic;
 }
 
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
 @media (min-width: 600px) {
   .item {
     width: 80%;
