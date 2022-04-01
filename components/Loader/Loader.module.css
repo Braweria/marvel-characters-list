@@ -1,0 +1,116 @@
+.loaderWrapper {
+  position: relative;
+  height: 40px;
+  aspect-ratio: 1/1;
+}
+
+.loaderA {
+  animation: animate-a 1.3s ease infinite;
+  clip: rect(0, 40px, 40px, 20px);
+  width: 100%;
+  aspect-ratio: 1/1;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.loaderA::after {
+  animation: animate-a2 1.3s ease-in-out infinite;
+  clip: rect(0, 40px, 40px, 20px);
+  content: '';
+  border-radius: 50%;
+  width: 100%;
+  aspect-ratio: 1/1;
+  left: 0;
+  top: 0;
+  position: absolute;
+}
+
+.loaderB {
+  animation: animate-b 1.3s ease infinite;
+  clip: rect(0, 40px, 40px, 20px);
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: scale(1, -1);
+}
+
+.loaderB::after {
+  box-shadow: inset 0 0 0 3px var(--marvel-red);
+  animation: animate-b2 1.3s ease-in-out infinite;
+  clip: rect(0, 40px, 40px, 20px);
+  content: '';
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  left: 0;
+  top: 0;
+  position: absolute;
+  transform: scale(1, -1);
+}
+
+@keyframes animate-a {
+  0% {
+    transform: rotate(-360deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animate-a2 {
+  0% {
+    box-shadow: inset 0 0 0 3px var(--marvel-red);
+    transform: rotate(180deg);
+  }
+
+  40% {
+    box-shadow: inset 0 0 0 3px var(--marvel-red);
+    transform: rotate(70deg);
+  }
+
+  60% {
+    box-shadow: inset 0 0 0 3px var(--marvel-red);
+    transform: rotate(70deg);
+  }
+
+  100% {
+    box-shadow: inset 0 0 0 3px var(--marvel-red);
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes animate-b {
+  0% {
+    transform: rotate(-180deg);
+  }
+
+  100% {
+    transform: rotate(540deg);
+  }
+}
+
+@keyframes animate-b2 {
+  0% {
+    box-shadow: inset 0 0 0 3px var(--marvel-red);
+    transform: rotate(180deg);
+  }
+
+  40% {
+    box-shadow: inset 0 0 0 3px var(--marvel-red);
+    transform: rotate(70deg);
+  }
+
+  60% {
+    box-shadow: inset 0 0 0 3px var(--marvel-red);
+    transform: rotate(70deg);
+  }
+
+  100% {
+    box-shadow: inset 0 0 0 3px var(--marvel-red);
+    transform: rotate(180deg);
+  }
+}
