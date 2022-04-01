@@ -20,51 +20,50 @@ export function CharacterList() {
   const dispatch = useDispatch();
 
   const loadMore = () => {
+    console.log('load more');
     dispatch(updateOffset());
     dispatch(fetchCharacters());
   };
 
   return (
-    characterLoadingStatus === 'idle' && (
-      <Virtuoso
-        className={styles.virtuoso}
-        data={characters}
-        itemContent={(_index, character) => {
-          return (
-            <Link
-              href={{
-                pathname: '/[id]',
-                query: { id: character.id },
-              }}
-            >
-              <a>
-                <div>
-                  <Avatar
-                    src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-                    alt={character.name}
-                  />
-                </div>
-                <div className={styles.information}>
-                  <span>{character.name}</span>
-                  {character.description ? (
-                    <p>{character.description}</p>
-                  ) : (
-                    <p className={styles.noDescription}>
-                      No description available
-                    </p>
-                  )}
-                </div>
-                <ArrowIcon />
-              </a>
-            </Link>
-          );
-        }}
-        components={{
-          Item,
-          List,
-        }}
-        endReached={loadMore}
-      />
-    )
+    <Virtuoso
+      className={styles.virtuoso}
+      data={characters}
+      itemContent={(_index, character) => {
+        return (
+          <Link
+            href={{
+              pathname: '/[id]',
+              query: { id: character.id },
+            }}
+          >
+            <a>
+              <div>
+                <Avatar
+                  src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+                  alt={character.name}
+                />
+              </div>
+              <div className={styles.information}>
+                <span>{character.name}</span>
+                {character.description ? (
+                  <p>{character.description}</p>
+                ) : (
+                  <p className={styles.noDescription}>
+                    No description available
+                  </p>
+                )}
+              </div>
+              <ArrowIcon />
+            </a>
+          </Link>
+        );
+      }}
+      components={{
+        Item,
+        List,
+      }}
+      endReached={loadMore}
+    />
   );
 }
