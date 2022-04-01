@@ -9,21 +9,24 @@ import {
 } from 'redux/slices/characters.slice';
 import { Item } from './Item';
 import { List } from './List';
+import { Footer } from './Footer';
 
 import styles from './CharacterList.module.css';
 import Link from 'next/link';
 import { ArrowIcon } from '@/ArrowIcon/ArrowIcon';
+import { useCallback } from 'react';
 
 export function CharacterList() {
   const characters = useSelector(selectAllCharacters);
-  const characterLoadingStatus = useSelector(selectCharacterStatus);
   const dispatch = useDispatch();
 
-  const loadMore = () => {
-    console.log('load more');
-    dispatch(updateOffset());
-    dispatch(fetchCharacters());
-  };
+  const loadMore = useCallback(() => {
+    // Fake loading time
+    setTimeout(() => {
+      dispatch(updateOffset());
+      dispatch(fetchCharacters());
+    }, 500);
+  }, [dispatch]);
 
   return (
     <Virtuoso
@@ -62,6 +65,7 @@ export function CharacterList() {
       components={{
         Item,
         List,
+        Footer,
       }}
       endReached={loadMore}
     />
