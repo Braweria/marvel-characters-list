@@ -10,6 +10,8 @@ import { HYDRATE } from 'next-redux-wrapper';
 import type { RootState } from '../store';
 import type { CharactersState, Character } from '../typesSlice';
 import { client } from '~/client';
+import { createApiUrl } from '~/createApiUrl';
+import { fetchComicsByCollectionUrl } from './comics.slice';
 
 const adapter = createEntityAdapter<Character>();
 const initialState: CharactersState = adapter.getInitialState({
@@ -19,38 +21,36 @@ const initialState: CharactersState = adapter.getInitialState({
   offset: 0,
 });
 
-const baseMarvelApi = 'https://gateway.marvel.com:443/v1/public/characters';
+const baseCharacterMarvelApi =
+  'https://gateway.marvel.com:443/v1/public/characters';
 
 export const fetchCharacters = createAsyncThunk(
   'characters/fetchCharacters',
   async (_props, { getState }) => {
     const { characters } = getState() as RootState;
 
-    const charactersUrl = new URL(baseMarvelApi);
+    const charactersUrl = createApiUrl(baseCharacterMarvelApi);
+
     charactersUrl.searchParams.set('limit', characters.limit.toString());
     charactersUrl.searchParams.set('offset', characters.offset.toString());
-
-    const now = Date.now().toString();
-    charactersUrl.searchParams.set('ts', now);
-
-    if (
-      !process.env.NEXT_PUBLIC_MARVEL_PUBLIC_KEY ||
-      !process.env.NEXT_PUBLIC_MARVEL_PRIVATE_KEY
-    ) {
-      throw new Error('No Marvel API Key was found');
-    }
-    const hash = md5(
-      `${now}${process.env.NEXT_PUBLIC_MARVEL_PRIVATE_KEY}${process.env.NEXT_PUBLIC_MARVEL_PUBLIC_KEY}`
-    );
-    charactersUrl.searchParams.set('hash', hash);
-    charactersUrl.searchParams.set(
-      'apikey',
-      process.env.NEXT_PUBLIC_MARVEL_PUBLIC_KEY.toString()
-    );
 
     const response = await client.get(charactersUrl.href);
 
     return response.data.data.results;
+  }
+);
+
+export const fetchCharacterById = createAsyncThunk(
+  'characters/fetchCharacterById',
+  async (id: number, { dispatch }) => {
+    const charactersUrl = createApiUrl(`${baseCharacterMarvelApi}/${id}`);
+
+    const response = await client.get(charactersUrl.href);
+    const [result] = response.data.data.results;
+
+    await dispatch(fetchComicsByCollectionUrl(result.comics.collectionURI));
+
+    return result;
   }
 );
 
@@ -86,6 +86,13 @@ export const charactersSlice = createSlice({
       .addCase(fetchCharacters.fulfilled, (state, action) => {
         adapter.upsertMany(state, action);
         state.status = 'idle';
+      })
+      .addCase(fetchCharacterById.pending, (state, action) => {
+        state.statuses[action.meta.arg] = 'loading';
+      })
+      .addCase(fetchCharacterById.fulfilled, (state, action) => {
+        adapter.upsertOne(state, action);
+        state.statuses[action.payload.id] = 'idle';
       });
   },
 });
