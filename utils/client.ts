@@ -38,8 +38,7 @@ export async function client(
     }
     throw new Error(response.statusText);
   } catch (error) {
-    console.log('__ERROR__', error);
-    throw new Error(error?.message ? error.message : data);
+    console.error('__ERROR__', error);
   }
 }
 
