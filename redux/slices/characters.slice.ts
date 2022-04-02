@@ -49,7 +49,7 @@ export const fetchCharacterById = createAsyncThunk(
     const charactersUrl = createApiUrl(`${baseCharacterMarvelApi}/${id}`);
 
     const response = await client.get(charactersUrl.href);
-    const [result] = response.data.data.results;
+    const [result] = response?.data.data.results;
 
     await dispatch(fetchComicsByCharacterId(id));
     await dispatch(fetchEventsByCharacterId(id));

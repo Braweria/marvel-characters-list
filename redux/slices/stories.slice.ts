@@ -30,7 +30,7 @@ export const fetchStoriesByCharacterId = createAsyncThunk(
     );
 
     const response = await client.get(collectionUrl.href);
-    return response.data.data.results;
+    return response?.data.data.results;
   }
 );
 
