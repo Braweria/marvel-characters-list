@@ -8,25 +8,13 @@ import type { NextPageWithTitle } from '~/utils/NextPageWithTitle';
 // eslint-disable-next-line react/function-component-definition
 const Home: NextPageWithTitle = () => {
   return (
-    <div style={{ height: '100vh' }}>
+    <div>
       <Head>
         <title>Marvel Characters</title>
       </Head>
 
-      <main
-        style={{
-          textAlign: 'center',
-          color: 'white',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100%',
-        }}
-      >
-        <h1>Marvel Characters</h1>
-        <CharacterList />
-      </main>
+      <h1>Marvel Characters</h1>
+      <CharacterList />
     </div>
   );
 };

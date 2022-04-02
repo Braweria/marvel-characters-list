@@ -13,7 +13,15 @@ function MyApp({ Component, pageProps }: AppPropsWithTitle) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{title}</title>
       </Head>
-      <Component {...pageProps} />
+      <main
+        style={{
+          width: 800,
+          margin: 'auto',
+          height: '100%',
+        }}
+      >
+        <Component {...pageProps} />
+      </main>
     </>
   );
 }
