@@ -46,12 +46,14 @@ export type ResourceUrl = {
   url: string;
 };
 
-export type Comic = {
+export type ComicEventSeriesStory = {
   id: number;
   title: string;
   description: string;
-  thumbnail: Thumbnail;
-  urls: ResourceUrl[];
+  thumbnail?: Thumbnail;
+  characters: Resource;
+  urls?: ResourceUrl[];
 };
 
-export type ComicState = InitialState & EntityState<Comic>;
+export type ComicEventSeriesStoryState = InitialState &
+  EntityState<ComicEventSeriesStory>;
