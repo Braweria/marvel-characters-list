@@ -30,6 +30,7 @@ export function CharacterList() {
 
   return (
     <Virtuoso
+      id="marvel-characters"
       className={styles.virtuoso}
       data={characters}
       useWindowScroll
@@ -44,7 +45,7 @@ export function CharacterList() {
             <a>
               <div>
                 <Avatar
-                  src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+                  src={`${character?.thumbnail?.path}.${character?.thumbnail?.extension}`}
                   alt={character.name}
                 />
               </div>
