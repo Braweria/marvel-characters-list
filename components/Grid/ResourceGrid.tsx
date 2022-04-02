@@ -1,19 +1,31 @@
 import { VirtuosoGrid } from 'react-virtuoso';
-import { selectComicById, selectComicsByIds } from 'redux/slices/comics.slice';
+
 import { useAppSelector } from 'redux/store';
-import { extractIdFromUris, mapArrayToKeyValue } from './consts';
+import { GridContent } from './GridContent';
+import { GridStoryContent } from './GridStoryContent';
+import { Item } from './Item';
+import { List } from './List';
 import styles from './ResourceGrid.module.css';
+import { ResourceGridProps } from './types';
 
-export function ResourceGrid({ items }) {
-  const ids = extractIdFromUris(mapArrayToKeyValue(items, 'resourceURI'));
-
-  const comics = useAppSelector((state) => selectComicsByIds(state, ids));
-  console.log(comics);
+export function ResourceGrid({ items, type }: ResourceGridProps): JSX.Element {
+  console.log(items[0], type);
   return (
     <VirtuosoGrid
       className={styles.virtuoso}
       totalCount={items.length}
-      itemContent={(index) => <p>{items[index].name}</p>}
+      useWindowScroll
+      itemContent={(index) =>
+        type === 'stories' ? (
+          <GridStoryContent item={items[index]} />
+        ) : (
+          <GridContent item={items[index]} />
+        )
+      }
+      components={{
+        List,
+        Item,
+      }}
     />
   );
 }

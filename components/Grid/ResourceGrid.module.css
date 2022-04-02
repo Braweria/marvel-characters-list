@@ -1,4 +1,69 @@
 .virtuoso {
   width: 100%;
-  height: 600px;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item {
+  flex: 0 1 50%;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.contentLink {
+  display: block;
+}
+
+.contentImageWrapper {
+  position: relative;
+  aspect-ratio: 2/3;
+}
+
+.contentImageOverlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 3rem;
+  aspect-ratio: 1/1;
+  display: none;
+}
+
+.contentLink:hover .contentImageWrapper::before {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--marvel-red);
+  opacity: 0.5;
+  z-index: 1;
+}
+
+.contentLink:hover .contentImageOverlay {
+  display: block;
+  z-index: 2;
+}
+
+@media (min-width: 600px) {
+  .item {
+    flex: 0 1 33%;
+  }
+}
+
+@media (min-width: 800px) {
+  .item {
+    flex: 0 1 25%;
+  }
+}
+
+@media (min-width: 1000px) {
+  .item {
+    flex: 0 1 20%;
+  }
 }
