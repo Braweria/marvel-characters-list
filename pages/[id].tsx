@@ -31,10 +31,8 @@ export default function CharacterPage({ character }: { character: Character }) {
     selectStoriesByCharacterName(state, character.name)
   );
 
-  console.log(events);
-
   return (
-    <div>
+    <div id="character-page">
       <ArrowBackButton />
       <h1>{character.name}</h1>
       {character.description ? (
@@ -42,30 +40,38 @@ export default function CharacterPage({ character }: { character: Character }) {
       ) : (
         <p className={styles.noDescription}>No description available</p>
       )}
-      <h2>Comics</h2>
-      {comics.length > 0 ? (
-        <ResourceGrid items={comics} type="comics" />
-      ) : (
-        <p className={styles.noDescription}>No comics available</p>
-      )}
-      <h2>Events</h2>
-      {events.length > 0 ? (
-        <ResourceGrid items={events} type="events" />
-      ) : (
-        <p className={styles.noDescription}>No events available</p>
-      )}
-      <h2>Series</h2>
-      {series.length > 0 ? (
-        <ResourceGrid items={series} type="series" />
-      ) : (
-        <p className={styles.noDescription}>No series available</p>
-      )}
-      <h2>Stories</h2>
-      {stories.length > 0 ? (
-        <ResourceGrid items={stories} type="stories" />
-      ) : (
-        <p className={styles.noDescription}>No stories available</p>
-      )}
+      <section id="comics">
+        <h2>Comics</h2>
+        {comics.length > 0 ? (
+          <ResourceGrid items={comics} type="comics" />
+        ) : (
+          <p className={styles.noDescription}>No comics available</p>
+        )}
+      </section>
+      <section id="events">
+        <h2>Events</h2>
+        {events.length > 0 ? (
+          <ResourceGrid items={events} type="events" />
+        ) : (
+          <p className={styles.noDescription}>No events available</p>
+        )}
+      </section>
+      <section id="series">
+        <h2>Series</h2>
+        {series.length > 0 ? (
+          <ResourceGrid items={series} type="series" />
+        ) : (
+          <p className={styles.noDescription}>No series available</p>
+        )}
+      </section>
+      <section id="stories">
+        <h2>Stories</h2>
+        {stories.length > 0 ? (
+          <ResourceGrid items={stories} type="stories" />
+        ) : (
+          <p className={styles.noDescription}>No stories available</p>
+        )}
+      </section>
     </div>
   );
 }
@@ -92,3 +98,5 @@ export const getServerSideProps = wrapper.getServerSideProps(
       };
     }
 );
+
+CharacterPage.title = "Marvel's Character";

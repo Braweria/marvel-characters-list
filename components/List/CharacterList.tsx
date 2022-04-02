@@ -50,7 +50,7 @@ export function CharacterList() {
                 />
               </div>
               <div className={styles.information}>
-                <span>{character.name}</span>
+                <span className='character-name'>{character.name}</span>
                 {character.description ? (
                   <p>{character.description}</p>
                 ) : (
