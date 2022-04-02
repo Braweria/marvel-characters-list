@@ -20,6 +20,6 @@
       "~/*": ["./utils/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "cypress/integration/home.spec.js"],
   "exclude": ["node_modules"]
 }
