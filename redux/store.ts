@@ -5,6 +5,9 @@ import { useSelector } from 'react-redux';
 
 import { characterReducer } from './slices/characters.slice';
 import { comicReducer } from './slices/comics.slice';
+import { eventReducer } from './slices/events.slice';
+import { seriesReducer } from './slices/series.slice';
+import { storyReducer } from './slices/stories.slice';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const makeStore = () =>
@@ -12,6 +15,9 @@ export const makeStore = () =>
     reducer: {
       characters: characterReducer,
       comics: comicReducer,
+      events: eventReducer,
+      stories: storyReducer,
+      series: seriesReducer,
     },
   });
 

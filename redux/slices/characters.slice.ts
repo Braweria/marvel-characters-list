@@ -11,7 +11,10 @@ import type { RootState } from '../store';
 import type { CharactersState, Character } from '../typesSlice';
 import { client } from '~/client';
 import { createApiUrl } from '~/createApiUrl';
-import { fetchComicsByCollectionUrl } from './comics.slice';
+import { fetchComicsByCharacterId } from './comics.slice';
+import { fetchEventsByCharacterId } from './events.slice';
+import { fetchStoriesByCharacterId } from './stories.slice';
+import { fetchSeriesByCharacterId } from './series.slice';
 
 const adapter = createEntityAdapter<Character>();
 const initialState: CharactersState = adapter.getInitialState({
@@ -21,7 +24,7 @@ const initialState: CharactersState = adapter.getInitialState({
   offset: 0,
 });
 
-const baseCharacterMarvelApi =
+export const baseCharacterMarvelApi =
   'https://gateway.marvel.com:443/v1/public/characters';
 
 export const fetchCharacters = createAsyncThunk(
@@ -48,7 +51,10 @@ export const fetchCharacterById = createAsyncThunk(
     const response = await client.get(charactersUrl.href);
     const [result] = response.data.data.results;
 
-    await dispatch(fetchComicsByCollectionUrl(result.comics.collectionURI));
+    await dispatch(fetchComicsByCharacterId(id));
+    await dispatch(fetchEventsByCharacterId(id));
+    await dispatch(fetchStoriesByCharacterId(id));
+    await dispatch(fetchSeriesByCharacterId(id));
 
     return result;
   }
