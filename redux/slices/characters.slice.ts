@@ -39,7 +39,7 @@ export const fetchCharacters = createAsyncThunk(
 
     const response = await client.get(charactersUrl.href);
 
-    return response.data.data.results;
+    return response?.data.data.results;
   }
 );
 
