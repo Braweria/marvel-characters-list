@@ -3,7 +3,7 @@ import { fetchCharacters } from 'redux/slices/characters.slice';
 import { wrapper } from 'redux/store';
 
 import { CharacterList } from '@/List';
-import type { NextPageWithTitle } from '~/utils/NextPageWithTitle';
+import type { NextPageWithTitle } from '~/NextPageWithTitle';
 
 // eslint-disable-next-line react/function-component-definition
 const Home: NextPageWithTitle = () => {
