@@ -15,6 +15,7 @@ export function ResourceGrid({ items, type }: ResourceGridProps): JSX.Element {
       className={styles.virtuoso}
       totalCount={items.length}
       useWindowScroll
+      overscan={10}
       itemContent={(index) =>
         type === 'stories' ? (
           <GridStoryContent item={items[index]} />
