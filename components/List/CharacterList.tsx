@@ -32,6 +32,7 @@ export function CharacterList() {
     <Virtuoso
       className={styles.virtuoso}
       data={characters}
+      useWindowScroll
       itemContent={(_index, character) => {
         return (
           <Link
