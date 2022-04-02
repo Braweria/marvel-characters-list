@@ -9,12 +9,12 @@ import { HYDRATE } from 'next-redux-wrapper';
 
 import type { RootState } from '../store';
 import type { CharactersState, Character } from '../typesSlice';
-import { client } from '~/client';
-import { createApiUrl } from '~/createApiUrl';
 import { fetchComicsByCharacterId } from './comics.slice';
 import { fetchEventsByCharacterId } from './events.slice';
-import { fetchStoriesByCharacterId } from './stories.slice';
 import { fetchSeriesByCharacterId } from './series.slice';
+import { fetchStoriesByCharacterId } from './stories.slice';
+import { client } from '~/client';
+import { createApiUrl } from '~/createApiUrl';
 
 const adapter = createEntityAdapter<Character>();
 const initialState: CharactersState = adapter.getInitialState({
@@ -70,7 +70,8 @@ export const charactersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(HYDRATE, (state, action) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .addCase(HYDRATE, (state, action: any) => {
         /**
          * TypeError on action.payload
          * Property 'payload' does not exist on type 'Action<"__NEXT_REDUX_WRAPPER_HYDRATE__">'.

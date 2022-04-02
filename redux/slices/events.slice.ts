@@ -40,7 +40,8 @@ export const eventsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(HYDRATE, (state, action) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .addCase(HYDRATE, (state, action: any) => {
         /**
          * TypeError on action.payload
          * Property 'payload' does not exist on type 'Action<"__NEXT_REDUX_WRAPPER_HYDRATE__">'.
