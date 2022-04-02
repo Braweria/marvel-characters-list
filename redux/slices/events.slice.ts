@@ -10,6 +10,7 @@ import type { RootState } from '../store';
 import type {
   ComicEventSeriesStoryState,
   ComicEventSeriesStory,
+  SelectAllByCharacterName,
 } from '../typesSlice';
 import { baseCharacterMarvelApi } from './characters.slice';
 import { client } from '~/client';
@@ -86,9 +87,8 @@ export const selectEventsByIds = createSelector(
   }
 );
 
-export const selectEventsByCharacterName = createSelector(
-  [selectAllEvents, (state, name) => name],
-  (state, name) => {
+export const selectEventsByCharacterName: SelectAllByCharacterName =
+  createSelector([selectAllEvents, (state, name) => name], (state, name) => {
     return state.filter((event) => {
       let hasCharacter = false;
       event.characters.items.forEach((character) => {
@@ -98,5 +98,4 @@ export const selectEventsByCharacterName = createSelector(
       });
       return hasCharacter;
     });
-  }
-);
+  });

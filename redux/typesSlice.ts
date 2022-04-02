@@ -1,4 +1,5 @@
 import type { EntityState } from '@reduxjs/toolkit';
+import { RootState } from './store';
 
 export type Statuses = 'idle' | 'loading' | 'error';
 
@@ -57,3 +58,8 @@ export type ComicEventSeriesStory = {
 
 export type ComicEventSeriesStoryState = InitialState &
   EntityState<ComicEventSeriesStory>;
+
+export type SelectAllByCharacterName = (
+  state: RootState,
+  name: string
+) => ComicEventSeriesStory[];
