@@ -6,7 +6,7 @@ import { GridContentProps } from './types';
 export function GridContent({ item }: GridContentProps) {
   return (
     <div>
-     <Link href={item.urls[0].url}>
+      <Link href={item.urls ? item.urls[0]?.url : '#'}>
         <a target="_blank" className={styles.contentLink}>
           {item.thumbnail && (
             <div className={styles.contentImageWrapper}>

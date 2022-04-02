@@ -5,8 +5,7 @@ import {
 
 import { useAppSelector, wrapper } from 'redux/store';
 
-import { Avatar } from '@/Avatar/Avatar';
-import { ResourceGrid } from '@/Grid/ResourceGrid';
+import { ResourceGrid } from '@/Grid';
 import { Character } from 'redux/typesSlice';
 
 import { selectComicsByCharacterName } from 'redux/slices/comics.slice';
@@ -14,12 +13,9 @@ import { selectEventsByCharacterName } from 'redux/slices/events.slice';
 import { selectSeriesByCharacterName } from 'redux/slices/series.slice';
 import { selectStoriesByCharacterName } from 'redux/slices/stories.slice';
 
-/**
- * stories
- * comics
- * events
- * series
- */
+import styles from '../components/List/CharacterList.module.css';
+import Link from 'next/link';
+import { ArrowBackButton } from '@/ArrowIcon/ArrowBackButton';
 
 export default function CharacterPage({ character }: { character: Character }) {
   const comics = useAppSelector((state) =>
@@ -35,19 +31,41 @@ export default function CharacterPage({ character }: { character: Character }) {
     selectStoriesByCharacterName(state, character.name)
   );
 
+  console.log(events);
+
   return (
     <div>
+      <ArrowBackButton />
       <h1>{character.name}</h1>
-      {/* <Avatar src={character.image} alt={character.name} /> */}
-      <p>{character.description}</p>
+      {character.description ? (
+        <p>{character.description}</p>
+      ) : (
+        <p className={styles.noDescription}>No description available</p>
+      )}
       <h2>Comics</h2>
-      <ResourceGrid items={comics} type="comics" />
+      {comics.length > 0 ? (
+        <ResourceGrid items={comics} type="comics" />
+      ) : (
+        <p className={styles.noDescription}>No comics available</p>
+      )}
       <h2>Events</h2>
-      <ResourceGrid items={events} type="events" />
+      {events.length > 0 ? (
+        <ResourceGrid items={events} type="events" />
+      ) : (
+        <p className={styles.noDescription}>No events available</p>
+      )}
       <h2>Series</h2>
-      <ResourceGrid items={series} type="series" />
+      {series.length > 0 ? (
+        <ResourceGrid items={series} type="series" />
+      ) : (
+        <p className={styles.noDescription}>No series available</p>
+      )}
       <h2>Stories</h2>
-      <ResourceGrid items={stories} type="stories" />
+      {stories.length > 0 ? (
+        <ResourceGrid items={stories} type="stories" />
+      ) : (
+        <p className={styles.noDescription}>No stories available</p>
+      )}
     </div>
   );
 }
