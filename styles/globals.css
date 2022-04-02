@@ -14,8 +14,18 @@ body {
   background-color: var(--background);
 }
 
+main {
+  width: 100%;
+  margin: auto;
+  height: 100%;
+}
+
 h1 {
   margin: 2rem 0 1rem;
+}
+
+h2 {
+  margin: 1rem 0 0.5rem;
 }
 
 a {
@@ -33,5 +43,11 @@ a {
   :root {
     --background: #fff;
     --color: #202020;
+  }
+}
+
+@media (min-width: 800px) {
+  main {
+    width: 800px;
   }
 }
