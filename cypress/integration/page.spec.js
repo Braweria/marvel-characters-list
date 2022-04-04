@@ -23,15 +23,14 @@ describe('character details page', () => {
       cy.visit('/');
       cy.get('#marvel-characters li').first().click();
       cy.get('#character-page').should('be.visible');
-      cy.get(`#${section}`).scrollIntoView();
 
-      cy.get(`#${section}`).should('be.visible');
-
-      if (cy.get(`#${section}`).contains('div')) {
-        cy.get(`#${section} div > div`).its('length').should('be.gt', 0);
-      } else {
-        cy.get(`#${section} p`).should('contain', /no \D+ available/iu);
-      }
+      cy.get(`#${section}`).then((sectionRef) => {
+        if (sectionRef.find('p').length > 0) {
+          expect(sectionRef.find('p').text()).to.eq(`No ${section} available`);
+        } else {
+          expect(sectionRef.find('div > div').length).to.be.gt(0);
+        }
+      });
     });
   });
 });
