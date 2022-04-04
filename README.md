@@ -1,15 +1,28 @@
-# My personal Next.js Boilerplate
+# Marvel Character List
 
-This boilerplate uses the following configurations and setups:
+A website that displays a list of marvel characters, using the Marvel API and a virtualised list. Each character has their own page displaying their comics and events. For this project the following libraries were used:
 
-- Eslint Galex
-- Prettier
+- React
+- Next.js
 - TypeScript
+- Redux Toolkit
+- Virtuoso
+- Cypress
 
-It uses what I personally prefer to work with. It was originally bootstraped with `yarn create next-app --typescript`.  
+You can visit the website here: [http://marvel-characters-list.vercel.app](http://marvel-characters-list.vercel.app)
 
-## Clone repo
+## Getting Started
+
+Make a copy of `.env.example` and fill it out with your own API keys.
+
+Start the development server.
 
 ```ps1
-git clone --depth=1 https://github.com/Braweria/nextjs-ts-boilerplate.git <dir-app-name>
+yarn dev
+```
+
+Open the Cypress e2e test.
+
+```ps1
+yarn open
 ```
